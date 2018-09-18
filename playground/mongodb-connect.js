@@ -15,7 +15,7 @@ MongoClient.connect('mongodb://controllo.local:27017/TodoApp', { useNewUrlParser
 
     const db = client.db('TodoApp');
 
-    db.collection('Users').insertOne({ 'name': 'nn S. Sakhare', 'age': 28, 'location': 'Beed' }, (err, results) => {
+    db.collection('Users').insertOne({ 'name': 'Sakhare', 'age': 28, 'location': 'Beed' }, (err, results) => {
         if (err) {
             return console.log(`Unable to add to the Users ${err}`);
         }
