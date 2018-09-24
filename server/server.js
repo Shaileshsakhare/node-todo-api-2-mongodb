@@ -9,7 +9,7 @@ var app = express();
 
 app.use(bodyParser.json());
 
-app.post('/todo', (req, res) => {
+app.post('/todos', (req, res) => {
     console.log(req.body.text);
     var newTodo = new Todo({
         text: req.body.text
@@ -27,6 +27,8 @@ app.listen(3000, () => {
     console.log('server is listening on 3000');
 })
 
+
+module.exports = { app };
 
 // var newTodo = new Todo({
 //     text: 'Cook Dinner'
