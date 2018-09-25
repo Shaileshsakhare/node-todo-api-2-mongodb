@@ -1,13 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-let ObjectID = require('mongodb');
+let { ObjectID } = require('mongodb');
 
 var { mongoose } = require('./db/mongoose.js');
 var { Todo } = require('./models/todo.js');
 var { User } = require('./models/user.js');
 
+mongoose.set('debug', true);
 
 var app = express();
+
+const port = process.env.port || 3000;
 
 app.use(bodyParser.json());
 
@@ -37,10 +40,10 @@ app.get('/todos/:id', (req, res) => {
     //   console.log('--------------------');
     const id = req.params.id;
     // console.log(id);
-    // if (!ObjectID.isValid(id)) {
-    //     //   console.log('2');
-    //     return res.status(404).send();
-    // }
+    if (!ObjectID.isValid(id)) {
+        //   console.log('2');
+        return res.status(404).send();
+    }
     Todo.findById(id)
         .then((todos) => {
             if (!todos) {
@@ -54,8 +57,8 @@ app.get('/todos/:id', (req, res) => {
         });
 })
 
-app.listen(3000, () => {
-    console.log('server is listening on 3000');
+app.listen(port, () => {
+    console.log(`Started at ${port}`);
 })
 
 
